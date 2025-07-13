@@ -1,0 +1,219 @@
+
+:root {
+    --bg-color: rgba(0, 0, 0, 0.3);
+    --text-color: #f0f0f0;
+    --accent-color: #66aaff;
+    --nav-bg: rgba(0, 0, 0, 0.5);
+    --nav-text: #ffffff;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-color: rgba(20, 20, 20, 0.8);
+        --text-color: #f0f0f0;
+        --accent-color: #66aaff;
+        --nav-bg: rgba(0, 0, 0, 0.7);
+        --nav-text: #ffffff;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Noto Sans SC', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    background: var(--bg-color) url('./wp.png') no-repeat center center fixed;
+    background-size: cover;
+    color: var(--text-color);
+}
+
+#home {
+    text-align: center;
+}
+
+.section:not(#home) {
+    text-align: left;
+    padding: 20px 30px;
+}
+
+.center {
+    max-width: 1200px;
+    margin: 80px auto 20px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 8px rgba(200, 200, 200, 0.1);
+    border-radius: 10px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 1s ease, transform 1s ease;
+    position: relative;
+    z-index: 500;
+    color: var(--text-color);
+    background: linear-gradient(90deg, rgba(30,30,30,0.5) 0%, rgba(225,225,225,0.5) 100%);
+    border: 2px solid var(--accent-color);
+}
+
+.center.loaded {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.section {
+    display: none;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.section.active {
+    display: block;
+    opacity: 1;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(30, 30, 30, 0.5);
+    padding: 10px 0;
+    box-shadow: 0 4px 8px rgba(200, 200, 200, 0.1);
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+nav a {
+    color: var(--accent-color);
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease, transform 0.3s ease, background-color 0.3s ease;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+nav a:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+img {
+    border-radius: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+img:hover {
+    transform: scale(1.05);
+}
+
+a {
+    color: #66aaff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: #66aaff;
+}
+
+@media (max-width: 768px) {
+    .center {
+        margin: 60px auto 20px;
+        padding: 15px;
+        width: 90%;
+        box-sizing: border-box;
+    }
+}
+
+@media (max-width: 480px) {
+    .center {
+        width: 95%;
+        padding: 10px;
+        margin-top: 80px;
+    }
+
+    nav a {
+        display: block;
+        margin: 10px 0;
+    }
+}
+
+.shake:hover {
+    animation: shake 0.5s;
+}
+
+p {
+    color: var(--text-color);
+}
+
+h1, h2 {
+    color: #ffffff;
+}
+
+iframe {
+    color: var(--text-color);
+    background-color: rgb(150, 150, 150);
+    border: 1px solid #444;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+}
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.6);
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.dropdown-content a {
+    color: #ffffff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transform: scale(1.1);
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+#log-content {
+    font-family: 'Noto Sans SC', sans-serif;
+    font-size: 18px;
+    color: #000000;
+    background-color: rgba(200, 200, 200, 0.3);
+    border: 1.5px solid rgba(100, 150, 200, 0.5);
+    box-shadow: 0 0 15px rgba(100, 150, 200, 0.3);
+    border-radius: 12px;
+    padding: 15px;
+    max-height: 400px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+}

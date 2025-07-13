@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mr.zz的个人网站-ZYH9949.TOP</title>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            color: #fff;
+            min-height: 100vh;
+            padding-top: 70px;
+            padding-bottom: 50px;
+        }
+        
+        /* 移动端顶栏 */
+        .mobile-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .site-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #4dabf7;
+            text-shadow: 0 0 10px rgba(77, 171, 247, 0.7);
+        }
+        
+        /* 菜单按钮 */
+        .menu-toggle {
+            background: transparent;
+            border: none;
+            color: #fff;
+            font-size: 1.8rem;
+            cursor: pointer;
+            width: 44px;
+            height: 44px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 菜单面板 */
+        .menu-panel {
+            position: fixed;
+            top: 70px;
+            right: -300px;
+            width: 280px;
+            height: calc(100vh - 70px);
+            background: rgba(10, 15, 35, 0.95);
+            backdrop-filter: blur(15px);
+            z-index: 999;
+            transition: all 0.4s ease;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.4);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .menu-panel.active {
+            right: 0;
+        }
+        
+        .menu-panel h3 {
+            color: #4dabf7;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .menu-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .menu-btn {
+            background: rgba(77, 171, 247, 0.15);
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .menu-btn i {
+            font-size: 1.2rem;
+            color: #4dabf7;
+        }
+        
+        .menu-btn:hover {
+            background: rgba(77, 171, 247, 0.3);
+            transform: translateX(5px);
+        }
+        
+        /* 内容区域 */
+        .center {
+            max-width: 95%;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        .section {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section h1, .section h2 {
+            color: #4dabf7;
+            margin-bottom: 20px;
+            text-shadow: 0 0 8px rgba(77, 171, 247, 0.5);
+        }
+        
+        .section p {
+            margin: 15px 0;
+            line-height: 1.6;
+        }
+        
+        .section a {
+            color: #4dabf7;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .section a:hover {
+            color: #fff;
+            text-shadow: 0 0 8px rgba(77, 171, 247, 0.8);
+        }
+        
+        .section a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #4dabf7;
+            transition: width 0.3s ease;
+        }
+        
+        .section a:hover::after {
+            width: 100%;
+        }
+        
+        /* Logo样式 */
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 3px solid rgba(77, 171, 247, 0.5);
+            box-shadow: 0 0 25px rgba(77, 171, 247, 0.5);
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0); }
+        }
+        
+        /* 日志区域 */
+        #log-content {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px;
+            border-radius: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* 底部区域 */
+        .mobile-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000;
+        }
+        
+        .mobile-footer a {
+            color: #4dabf7;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 8px 20px;
+            border-radius: 30px;
+            background: rgba(77, 171, 247, 0.15);
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-footer a:hover {
+            background: rgba(77, 171, 247, 0.3);
+            transform: translateY(-3px);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 480px) {
+            .logo {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .menu-panel {
+                width: 250px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 移动端顶栏 -->
+    <div class="mobile-header">
+        <div class="site-title">ZZ的个人网站</div>
+        <button class="menu-toggle" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </button>
+    </div>
+    
+    <!-- 菜单面板 -->
+    <div class="menu-panel" id="menu-panel">
+        <h3>网站导航</h3>
+        <div class="menu-buttons">
+            <button class="menu-btn" onclick="scrollToSection('home')">
+                <i class="fas fa-home"></i> 首页
+            </button>
+            <button class="menu-btn" onclick="scrollToSection('contact')">
+                <i class="fas fa-envelope"></i> 联系方式
+            </button>
+            <button class="menu-btn" onclick="scrollToSection('projects')">
+                <i class="fas fa-compass"></i> 导航
+            </button>
+            <button class="menu-btn" onclick="scrollToSection('projects-resources')">
+                <i class="fas fa-box-open"></i> 资源站
+            </button>
+            <button class="menu-btn" onclick="scrollToSection('log')">
+                <i class="fas fa-server"></i> 服务器动态
+            </button>
+            <button class="menu-btn" onclick="scrollToSection('about-me')">
+                <i class="fas fa-user"></i> 关于我
+            </button>
+            <button class="menu-btn" onclick="scrollToSection('about-web')">
+                <i class="fas fa-globe"></i> 关于本站
+            </button>
+        </div>
+    </div>
+    
+    <!-- 主内容区域 -->
+    <div class="center">
+        <!-- 首页 -->
+        <div id="home" class="section" data-aos="fade-up">
+            <div class="logo-container">
+                <img src="./data/logo.jpg" class="logo" alt="Mr.zz Logo">
+            </div>
+            <h1>Mr.zz的网站</h1>
+            <p>这里是Mr.zz的网站</p>
+            <p>
+                一位想要成为UP主的UP主 可以看看我的<a href="https://space.bilibili.com/2050563046">Bilibili</a>主页 
+                <br>
+                想联系我？ <a href="#contact">点这里！</a> 
+            </p>
+        </div>
+
+        <!-- 联系方式 -->
+        <div id="contact" class="section" data-aos="fade-up">
+            <h2>联系方式&常用社交媒体</h2>
+            <p>你可以通过以下方式找到我（找到我不代表能联系到我 诶嘿～）</p>
+            <div class="social-links">
+                <a href="https://space.bilibili.com/2050563046"><i class="fab fa-bilibili"></i> bilibili</a>
+                <a href="https://www.douyin.com/user/MS4wLjABAAAASNFil7y_fyH7dHrESy8lFLe_D0WVggt-rcjjeNr0XXY"><i class="fab fa-tiktok"></i> 抖音</a>
+                <a href="https://t.me/zyh9949"><i class="fab fa-telegram"></i> Telegram</a>
+                <a href="http://wpa.qq.com/msgrd?v=3&uin=1870665489&site=qq&menu=yes"><i class="fab fa-qq"></i> QQ</a>
+                <a href="https://github.com/zyh9949"><i class="fab fa-github"></i> GitHub</a>
+            </div>
+            <p><i class="fas fa-comment"></i> WeChat ID：ZYH_9949</p>
+            <p><i class="fab fa-qq"></i> QQ：1870665489</p>
+            <p><i class="fas fa-envelope"></i> E-Mail：<a href="mailto:zyhxxschina9949@outlook.com">zyhxxschina9949@outlook.com</a></p>
+        </div>
+        
+        <!-- 导航 -->
+        <div id="projects" class="section" data-aos="fade-up">
+            <h2>导航</h2>
+            <p>以下是本站提供的导航内容：</p>
+            <a href="#projects-resources">资源站</a>
+        </div>
+        
+        <!-- 资源站 -->
+        <div id="projects-resources" class="section" data-aos="fade-up">
+            <h2><i class="fas fa-box-open"></i> 资源站</h2>
+            <a href="http://zyh9949.top:5245/" class="resource-link">小zz的资源站</a>
+            <p>通过OpenList搭建的在线资源站</p>
+            <p>去看看呢？说不定可以找到你想要的</p>
+            <p><i class="fas fa-exclamation-triangle"></i> 本站资源仅供学习交流使用，全部免费提供，禁止用于商业用途</p>
+            <p><i class="fas fa-info-circle"></i> 温馨提示：速度慢的要死，谨慎访问</p>
+        </div>
+
+        <!-- 服务器动态 -->
+       <div id="log" class="section" data-aos="fade-up" data-section="log">
+             <h2>服务器动态</h2>
+             <pre id="log-content" style="white-space: pre-wrap; overflow-y: auto; max-height: 400px; border-radius: 12px; padding: 15px;"></pre>
+       </div>
+
+
+        <!-- 关于我 -->
+        <div id="about-me" class="section" data-aos="fade-up">
+            <h2><i class="fas fa-user"></i> 关于我</h2>
+            <p>我也不知道该说什么</p>
+            <p>我其实也不是很确定吧</p>
+            <p>就感觉可能好像有点那种</p>
+            <p>也不是说不好，就是有点</p>
+            <p>你要说没道理吧也不是</p>
+            <p>所以我就随便说说而已</p>
+        </div>
+
+        <!-- 关于网站 -->
+        <div id="about-web" class="section" data-aos="fade-up">
+            <h2><i class="fas fa-globe"></i> 关于本站</h2>
+            <p>
+                此网站由<a href="https://github.com/">GitHub</a>托管
+            </p>
+            <p>
+                网站模板源于xhdndmm的开源项目 | <a href="https://github.com/zyh9949/web">网站源码</a>
+            </p>
+            <p>
+                感谢 <a href="https://xhdndmm.cn">喜欢电脑的猫咪</a> 的鼎力支持 
+            </p>
+            <p>
+                最后更新时间 2025.07.13
+            </p>
+            <p>
+                Copyright © 2024-现在 Powered By ZGStudio
+            </p>
+        </div>
+    </div>
+    
+    <!-- 底部回到PC端链接 -->
+    <div class="mobile-footer">
+        <a href="index.html">回到PC端页面</a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // 初始化AOS动画
+        AOS.init({
+            duration: 800,
+            once: true,
+            easing: 'ease-out-quad'
+        });
+        
+        // 菜单切换功能
+        const menuToggle = document.getElementById('menu-toggle');
+        const menuPanel = document.getElementById('menu-panel');
+        
+        menuToggle.addEventListener('click', () => {
+            menuPanel.classList.toggle('active');
+            menuToggle.innerHTML = menuPanel.classList.contains('active') 
+                ? '<i class="fas fa-times"></i>' 
+                : '<i class="fas fa-bars"></i>';
+        });
+        
+        // 滚动到指定区域
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+                // 关闭菜单
+                menuPanel.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        }
+        
+        // 关闭菜单当点击外部区域
+        document.addEventListener('click', (e) => {
+            if (!menuPanel.contains(e.target) && !menuToggle.contains(e.target)) {
+                menuPanel.classList.remove('active');
+                menuToggle.innerHTML = '<i class="fas fa-bars"></i>';
+            }
+        });
+      
+    </script>
+</body>
+</html>
