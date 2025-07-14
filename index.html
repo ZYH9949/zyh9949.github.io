@@ -18,6 +18,16 @@
     window.location.replace("mobile.html");
   }
 </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script>
+  if (window.innerWidth <= 768 && !location.href.includes("mobile.html")) {
+    location.href = "mobile.html";
+  }
+</script>
+<noscript>
+  <meta http-equiv="refresh" content="0;url=mobile.html">
+</noscript>
+
 </head>
 
 <body>
